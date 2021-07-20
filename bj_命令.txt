@@ -1,0 +1,10 @@
+echo - display a line of text
+        Echo the STRING(s) to standard output
+        -e     enable interpretation of backslash escapes
+        **输出字符串：“”，同时默认末尾自带换行，不进行转义
+        
+        
+        
+vim -o上下窗口打开
+    -O左右窗口打开
+    -p分标签打开

@@ -1,0 +1,38 @@
+time和ctime_r函数的搭配使用
+time(time_t *t)//获取系统时间，返回的是从1970.1.1来经过的秒数，保存在t中
+ 
+ctime_r(time_t* t,char* c)//将t中保存的系统时间以字符串的形式格式化，并保存到c所指向的空间
+gettimeofday和localtime的搭配使用
+struct timeval tv;
+ 
+time_t time;
+ 
+gettimeofday(&tv,NULL)//获取系统时间，并保存到tv中，注意这里可以精确到微秒
+ 
+time=tv.tv_sec;
+ 
+struct tm* p_time=localtime(&time);//将系统时间转换为本地时间，考虑到本地时区和夏令时标志
+得到的时间返回到strcut tm结构体中
+
+  struct tm {
+                   int tm_sec;       /* 秒 – 取值区间为[0,59] */
+
+                   int tm_min;       /* 分 - 取值区间为[0,59] */
+
+                   int tm_hour;      /* 时 - 取值区间为[0,23] */
+
+                   int tm_mday;     /* 一个月中的日期 - 取值区间为[1,31] */
+
+                   int tm_mon;     /* 月份（从一月开始，0代表一月） - 取值区间为[0,11] */
+
+                   int tm_year;     /* 年份，其值等于实际年份减去1900 */
+
+                   int tm_wday;    /* 星期 – 取值区间为[0,6]，其中0代表星期天，1代表星期一 */
+
+                   int tm_yday;    /* 从每年1月1日开始的天数– 取值区间[0,365]，其中0代表1月1日 */
+
+                   int tm_isdst;    /* 夏令时标识符，夏令时tm_isdst为正；不实行夏令时tm_isdst为0 */    
+
+            };
+
+所以在输出年时要加1900，输出月要加1，一般输出前6个
