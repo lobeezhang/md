@@ -1,0 +1,32 @@
+#include "collectd.h"
+#include "plugin.h"
+#include "utils/common/common.h"
+
+static int test_submit(value_list_t *vl) {
+    int a=1,b=2,c=3,d=4;
+    plugin_dispatch_multivalue(vl, false, DS_TYPE_DERIVE, 
+                               "kasa",a,"mam",b,"qi",c,"lani",d,
+                               NULL);
+    return 0;                            
+}
+
+static int test_read(void) {
+  if (0) {
+    ERROR("test plugin: clock_boottime failed");
+    return -1;
+  }
+  
+  value_t v[1];
+  value_list_t vl = VALUE_LIST_INIT;
+
+  vl.values = v;//÷√ø’£ø
+  vl.values_len = 1;
+  sstrncpy(vl.plugin, "test", sizeof(vl.plugin));
+  sstrncpy(vl.type, "dasdasda", sizeof(vl.type));
+
+  return test_submit(&vl);
+}
+
+void module_register(void) {
+  plugin_register_read("test", test_read);
+}
